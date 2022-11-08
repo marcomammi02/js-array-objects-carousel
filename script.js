@@ -81,22 +81,6 @@ elePausePlayBtn.addEventListener('click', pausePlay);
 eleAutoscrollUpBtn.classList.toggle('active');
 eleInvertAutoscrollBtn.addEventListener('click', invertAutoscroll);
 
-function invertAutoscroll() {
-    if (autoscroll == true) {
-        clearInterval(autoNext);
-        autoPrev = setInterval(prevSlide, 3 * 1000);
-        autoscroll = false;
-        eleAutoscrollUpBtn.classList.toggle('active');
-        eleAutoscrollDownBtn.classList.toggle('active');
-    } else {
-        clearInterval(autoPrev);
-        autoNext = setInterval(nextSlide, 3 * 1000);
-        autoscroll = true
-        eleAutoscrollUpBtn.classList.toggle('active');
-        eleAutoscrollDownBtn.classList.toggle('active');
-    }
-
-}
 
 
 // functions
@@ -143,14 +127,40 @@ function prevSlide(){
 
 function pausePlay() {
     if (pause == false) {
-        clearInterval(autoNext);
+        if (autoscroll == true) {
+            clearInterval(autoNext);
+        } else {
+            clearInterval(autoPrev);
+        }
         pause = true;
         elePlayBtn.classList.toggle('active');
         elePauseBtn.classList.toggle('active');
     }else {
-        autoNext = setInterval(nextSlide, 3 * 1000);
+        if (autoscroll == true) {
+            autoNext = setInterval(nextSlide, 3 * 1000);
+        } else {
+            autoPrev = setInterval(prevSlide, 3 * 1000);
+        }
         pause = false
         elePlayBtn.classList.toggle('active');
         elePauseBtn.classList.toggle('active');
     }
 };
+
+
+function invertAutoscroll() {
+    if (autoscroll == true) {
+        clearInterval(autoNext);
+        autoPrev = setInterval(prevSlide, 3 * 1000);
+        autoscroll = false;
+        eleAutoscrollUpBtn.classList.toggle('active');
+        eleAutoscrollDownBtn.classList.toggle('active');
+    } else {
+        clearInterval(autoPrev);
+        autoNext = setInterval(nextSlide, 3 * 1000);
+        autoscroll = true
+        eleAutoscrollUpBtn.classList.toggle('active');
+        eleAutoscrollDownBtn.classList.toggle('active');
+    }
+
+}
