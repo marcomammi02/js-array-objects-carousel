@@ -96,7 +96,7 @@ body {
 
 .interval-comands {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .pause-play {
@@ -106,9 +106,21 @@ body {
     border-radius: 20px;
 }
 
-.pause-play:hover {
+.invert-autoscroll {
+    width: 6rem;
+    height: 3rem;
+    background-color: #bcbcbc;
+    border-radius: 20px;
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+button:hover {
     cursor: pointer;
 }
+
 
 .fa-play {
     display: none;
@@ -118,6 +130,16 @@ body {
 .fa-pause {
     display: none;
     font-size: 1.3rem;
+}
+
+.fa-arrow-up {
+    display: none;
+    font-size: 1.2rem;
+}
+
+.fa-arrow-down {
+    display: none;
+    font-size: 1.2rem;
 }
 
 .active {

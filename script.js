@@ -59,8 +59,13 @@ const eleDescriptionList = document.querySelectorAll('.description');
 const elePausePlayBtn = document.querySelector('.pause-play');
 const elePauseBtn = document.querySelector('.fa-pause');
 const elePlayBtn = document.querySelector('.fa-play');
+const eleInvertAutoscrollBtn = document.querySelector('.invert-autoscroll');
+const eleAutoscrollUpBtn = document.querySelector('.fa-arrow-up');
+const eleAutoscrollDownBtn = document.querySelector('.fa-arrow-down');
 
-let pause = false
+
+let pause = false;
+let autoscroll = true;
 
 let activeIndex = 0
 
@@ -68,24 +73,30 @@ eleBtnNext.addEventListener('click', nextSlide)
 eleBtnPrev.addEventListener('click', prevSlide)
 
 let autoNext = setInterval(nextSlide, 3 * 1000);
+let autoPrev;
 
 elePauseBtn.classList.toggle('active');
 elePausePlayBtn.addEventListener('click', pausePlay);
 
-function pausePlay() {
-    if (pause == false) {
-        clearInterval(autoNext);
-        pause = true;
-        elePlayBtn.classList.toggle('active');
-        elePauseBtn.classList.toggle('active');
-    }else {
-        autoNext = setInterval(nextSlide, 3 * 1000);
-        pause = false
-        elePlayBtn.classList.toggle('active');
-        elePauseBtn.classList.toggle('active');
-    }
-}
+eleAutoscrollUpBtn.classList.toggle('active');
+eleInvertAutoscrollBtn.addEventListener('click', invertAutoscroll);
 
+function invertAutoscroll() {
+    if (autoscroll == true) {
+        clearInterval(autoNext);
+        autoPrev = setInterval(prevSlide, 3 * 1000);
+        autoscroll = false;
+        eleAutoscrollUpBtn.classList.toggle('active');
+        eleAutoscrollDownBtn.classList.toggle('active');
+    } else {
+        clearInterval(autoPrev);
+        autoNext = setInterval(nextSlide, 3 * 1000);
+        autoscroll = true
+        eleAutoscrollUpBtn.classList.toggle('active');
+        eleAutoscrollDownBtn.classList.toggle('active');
+    }
+
+}
 
 
 // functions
@@ -105,7 +116,7 @@ function nextSlide() {
         eleImgList[activeIndex].classList.add('active');
         eleDescriptionList[activeIndex].classList.add('active');
         eleSmallImgList[activeIndex].classList.add('active-small');
-
+        
     }
 };
 
@@ -115,18 +126,31 @@ function prevSlide(){
         eleImgList[activeIndex].classList.remove('active');
         eleDescriptionList[activeIndex].classList.remove('active');
         eleSmallImgList[activeIndex].classList.remove('active-small');
-
+        
         if (activeIndex == 0) {
             activeIndex = eleImgList.length - 1;
         } else {
             activeIndex--;
         }
-
+        
         eleImgList[activeIndex].classList.add('active');
         eleDescriptionList[activeIndex].classList.add('active');
         eleSmallImgList[activeIndex].classList.add('active-small');
-
+        
     }
 };
 
 
+function pausePlay() {
+    if (pause == false) {
+        clearInterval(autoNext);
+        pause = true;
+        elePlayBtn.classList.toggle('active');
+        elePauseBtn.classList.toggle('active');
+    }else {
+        autoNext = setInterval(nextSlide, 3 * 1000);
+        pause = false
+        elePlayBtn.classList.toggle('active');
+        elePauseBtn.classList.toggle('active');
+    }
+};
