@@ -1,14 +1,15 @@
+html {
+    height: 100vh;
+}
+
 body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
 }
 
 .container {
+    margin: 6rem auto 2rem;
     display: flex;
     width: 1000px;
     height: 350px;
@@ -93,6 +94,32 @@ body {
     object-position: center;
 }
 
+.interval-comands {
+    display: flex;
+    justify-content: center;
+}
+
+.pause-play {
+    width: 4rem;
+    height: 3rem;
+    background-color: #bcbcbc;
+    border-radius: 20px;
+}
+
+.pause-play:hover {
+    cursor: pointer;
+}
+
+.fa-play {
+    display: none;
+    font-size: 1.3rem;
+}
+
+.fa-pause {
+    display: none;
+    font-size: 1.3rem;
+}
+
 .active {
     display: block;
 }
@@ -102,4 +129,5 @@ body {
     border: 3px solid #bcbcbc;
     box-sizing: border-box;
 }
+
 

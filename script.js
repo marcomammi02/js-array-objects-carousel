@@ -56,14 +56,35 @@ const eleBtnNext = document.querySelector('.btn-next');
 const eleImgList = document.querySelectorAll('.slider-img');
 const eleSmallImgList = document.querySelectorAll('.small-img')
 const eleDescriptionList = document.querySelectorAll('.description');
+const elePausePlayBtn = document.querySelector('.pause-play');
+const elePauseBtn = document.querySelector('.fa-pause');
+const elePlayBtn = document.querySelector('.fa-play');
+
+let pause = false
 
 let activeIndex = 0
 
 eleBtnNext.addEventListener('click', nextSlide)
 eleBtnPrev.addEventListener('click', prevSlide)
 
-const autoNext = setInterval(nextSlide, 3 * 1000);
+let autoNext = setInterval(nextSlide, 3 * 1000);
 
+elePauseBtn.classList.toggle('active');
+elePausePlayBtn.addEventListener('click', pausePlay);
+
+function pausePlay() {
+    if (pause == false) {
+        clearInterval(autoNext);
+        pause = true;
+        elePlayBtn.classList.toggle('active');
+        elePauseBtn.classList.toggle('active');
+    }else {
+        autoNext = setInterval(nextSlide, 3 * 1000);
+        pause = false
+        elePlayBtn.classList.toggle('active');
+        elePauseBtn.classList.toggle('active');
+    }
+}
 
 
 
@@ -74,13 +95,13 @@ function nextSlide() {
         eleImgList[activeIndex].classList.remove('active');
         eleDescriptionList[activeIndex].classList.remove('active');
         eleSmallImgList[activeIndex].classList.remove('active-small');
-
+        
         activeIndex++;
-
+        
         if (activeIndex == eleImgList.length) {
             activeIndex = 0;
         } 
-
+        
         eleImgList[activeIndex].classList.add('active');
         eleDescriptionList[activeIndex].classList.add('active');
         eleSmallImgList[activeIndex].classList.add('active-small');
@@ -106,4 +127,6 @@ function prevSlide(){
         eleSmallImgList[activeIndex].classList.add('active-small');
 
     }
-}
+};
+
+
