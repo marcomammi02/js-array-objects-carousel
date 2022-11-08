@@ -33,27 +33,34 @@ for (let i = 0; i < arrImages.length; i++) {
     const eleImg = document.createElement('img');
     eleImg.src = `img/${arrImages[i].image}`;
     eleImg.classList.add('slider-img');
-    eleSmallImgContainer.innerHTML += `<img class="small-img" src="${arrImages[i]}">`;
+    eleSmallImgContainer.innerHTML += `<img class="small-img" src="img/${arrImages[i].image}">`;
     const eleSmallImg = document.querySelector('.small-img');
+    const eleDescription = document.createElement('div');
+    eleDescription.classList.add('description')
+    eleDescription.innerHTML = `<h1 class="description-title">${arrImages[i].title}</h1><p class="description-text">${arrImages[i].text}</p>`
 
     if (i == 0) {
         eleImg.classList.add('active');
+        eleDescription.classList.add('active');
         eleSmallImg.classList.add('active-small');
     }
 
     eleSliderContainer.append(eleImg);
+    eleSliderContainer.append(eleDescription);
 }
 
 const eleBtnPrev = document.querySelector('.btn-prev');
 const eleBtnNext = document.querySelector('.btn-next');
 const eleImgList = document.querySelectorAll('.slider-img');
 const eleSmallImgList = document.querySelectorAll('.small-img')
+const eleDescriptionList = document.querySelectorAll('.description');
 
 let activeIndex = 0
 
 eleBtnNext.addEventListener('click', function() {
     if (activeIndex < eleImgList.length) {
         eleImgList[activeIndex].classList.remove('active');
+        eleDescriptionList[activeIndex].classList.remove('active');
         eleSmallImgList[activeIndex].classList.remove('active-small');
 
         activeIndex++;
@@ -63,6 +70,7 @@ eleBtnNext.addEventListener('click', function() {
         } 
 
         eleImgList[activeIndex].classList.add('active');
+        eleDescriptionList[activeIndex].classList.add('active');
         eleSmallImgList[activeIndex].classList.add('active-small');
 
     }
@@ -70,6 +78,7 @@ eleBtnNext.addEventListener('click', function() {
 eleBtnPrev.addEventListener('click', function() {
     if (activeIndex >= 0) {
         eleImgList[activeIndex].classList.remove('active');
+        eleDescriptionList[activeIndex].classList.remove('active');
         eleSmallImgList[activeIndex].classList.remove('active-small');
 
         if (activeIndex == 0) {
@@ -79,6 +88,7 @@ eleBtnPrev.addEventListener('click', function() {
         }
 
         eleImgList[activeIndex].classList.add('active');
+        eleDescriptionList[activeIndex].classList.add('active');
         eleSmallImgList[activeIndex].classList.add('active-small');
 
     }
