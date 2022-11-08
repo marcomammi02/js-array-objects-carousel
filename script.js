@@ -33,8 +33,10 @@ for (let i = 0; i < arrImages.length; i++) {
     const eleImg = document.createElement('img');
     eleImg.src = `img/${arrImages[i].image}`;
     eleImg.classList.add('slider-img');
+
     eleSmallImgContainer.innerHTML += `<img class="small-img" src="img/${arrImages[i].image}">`;
     const eleSmallImg = document.querySelector('.small-img');
+
     const eleDescription = document.createElement('div');
     eleDescription.classList.add('description')
     eleDescription.innerHTML = `<h1 class="description-title">${arrImages[i].title}</h1><p class="description-text">${arrImages[i].text}</p>`
@@ -57,7 +59,17 @@ const eleDescriptionList = document.querySelectorAll('.description');
 
 let activeIndex = 0
 
-eleBtnNext.addEventListener('click', function() {
+eleBtnNext.addEventListener('click', nextSlide)
+eleBtnPrev.addEventListener('click', prevSlide)
+
+const autoNext = setInterval(nextSlide, 3 * 1000);
+
+
+
+
+// functions
+
+function nextSlide() {
     if (activeIndex < eleImgList.length) {
         eleImgList[activeIndex].classList.remove('active');
         eleDescriptionList[activeIndex].classList.remove('active');
@@ -74,8 +86,10 @@ eleBtnNext.addEventListener('click', function() {
         eleSmallImgList[activeIndex].classList.add('active-small');
 
     }
-})
-eleBtnPrev.addEventListener('click', function() {
+};
+
+
+function prevSlide(){
     if (activeIndex >= 0) {
         eleImgList[activeIndex].classList.remove('active');
         eleDescriptionList[activeIndex].classList.remove('active');
@@ -92,4 +106,4 @@ eleBtnPrev.addEventListener('click', function() {
         eleSmallImgList[activeIndex].classList.add('active-small');
 
     }
-})
+}
