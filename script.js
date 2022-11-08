@@ -155,12 +155,18 @@ function invertAutoscroll() {
         autoscroll = false;
         eleAutoscrollUpBtn.classList.toggle('active');
         eleAutoscrollDownBtn.classList.toggle('active');
+        pause = false
+        elePlayBtn.classList.toggle('active');
+        elePauseBtn.classList.toggle('active');
     } else {
         clearInterval(autoPrev);
         autoNext = setInterval(nextSlide, 3 * 1000);
         autoscroll = true
         eleAutoscrollUpBtn.classList.toggle('active');
         eleAutoscrollDownBtn.classList.toggle('active');
+        pause = false
+        elePlayBtn.classList.toggle('active');
+        elePauseBtn.classList.toggle('active');
     }
 
 }
