@@ -1,3 +1,7 @@
+// Change autoscroll time (_sec):
+let time = 2;
+
+
 const arrImages = [
 	{
 		image: '01.webp',
@@ -29,6 +33,7 @@ const arrImages = [
 const eleSliderContainer = document.querySelector('.slider-container');
 const eleSmallImgContainer = document.querySelector('.small-img-container');
 
+
 for (let i = 0; i < arrImages.length; i++) {
     const eleImg = document.createElement('img');
     eleImg.src = `img/${arrImages[i].image}`;
@@ -39,7 +44,10 @@ for (let i = 0; i < arrImages.length; i++) {
 
     const eleDescription = document.createElement('div');
     eleDescription.classList.add('description')
-    eleDescription.innerHTML = `<h1 class="description-title">${arrImages[i].title}</h1><p class="description-text">${arrImages[i].text}</p>`
+    eleDescription.innerHTML = `
+    <h1 class="description-title">${arrImages[i].title}</h1>
+    <p class="description-text">${arrImages[i].text}</p>
+    `
 
     if (i == 0) {
         eleImg.classList.add('active');
@@ -72,7 +80,7 @@ let activeIndex = 0
 eleBtnNext.addEventListener('click', nextSlide)
 eleBtnPrev.addEventListener('click', prevSlide)
 
-let autoNext = setInterval(nextSlide, 3 * 1000);
+let autoNext = setInterval(nextSlide, time * 1000);
 let autoPrev;
 
 elePauseBtn.classList.toggle('active');
@@ -137,9 +145,9 @@ function pausePlay() {
         elePauseBtn.classList.toggle('active');
     }else {
         if (autoscroll == true) {
-            autoNext = setInterval(nextSlide, 3 * 1000);
+            autoNext = setInterval(nextSlide, time * 1000);
         } else {
-            autoPrev = setInterval(prevSlide, 3 * 1000);
+            autoPrev = setInterval(prevSlide, time * 1000);
         }
         pause = false
         elePlayBtn.classList.toggle('active');
@@ -151,7 +159,7 @@ function pausePlay() {
 function invertAutoscroll() {
     if (autoscroll == true) {
         clearInterval(autoNext);
-        autoPrev = setInterval(prevSlide, 3 * 1000);
+        autoPrev = setInterval(prevSlide, time * 1000);
         autoscroll = false;
         eleAutoscrollUpBtn.classList.toggle('active');
         eleAutoscrollDownBtn.classList.toggle('active');
@@ -162,7 +170,7 @@ function invertAutoscroll() {
         }
     } else {
         clearInterval(autoPrev);
-        autoNext = setInterval(nextSlide, 3 * 1000);
+        autoNext = setInterval(nextSlide, time * 1000);
         autoscroll = true
         eleAutoscrollUpBtn.classList.toggle('active');
         eleAutoscrollDownBtn.classList.toggle('active');
